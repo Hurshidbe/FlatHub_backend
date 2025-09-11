@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { useContainer } from "class-validator";
 import mongoose, { DateToString, Mongoose } from "mongoose";
-import { comforts, Districts, flatorhouse, for_who, Regions } from "src/enums/lessor.enums";
+import { comforts, currency, Districts, flatorhouse, for_who, Regions,  statuses } from "src/enums/lessor.enums";
 
 @Schema()
 export class Lessor {
@@ -12,7 +12,7 @@ export class Lessor {
     district : string
 
     @Prop()
-    location : string
+    geolocation : string // integration with google/yandex maps
 
     @Prop({type : flatorhouse})
     flatorhouse : flatorhouse
@@ -26,17 +26,26 @@ export class Lessor {
     @Prop({type: [for_who]})
     for_who: for_who[]
 
+    @Prop({default : false})
+    with_human : boolean
+
     @Prop()
     duration : Date
 
     @Prop({type : comforts})
     comforts: comforts
 
+    @Prop()
+    area : number // m/square
+
     @Prop({type : [String]})
     photos : string[]        // max 6
 
     @Prop()
     price : number //sum
+
+    @Prop({type : currency})
+    price_currency : currency
 
     @Prop()
     phone : string
@@ -48,10 +57,20 @@ export class Lessor {
     responsible_person: string
 
     @Prop()
+    extra_info : string
+
+    @Prop()
+    status : statuses
+
+    @Prop()
+    ip_address : string
+
+    @Prop()
     watched : number
 
     @Prop()
     likes : number
+
 }
 
 const LessorSchema = SchemaFactory.createForClass(Lessor)
