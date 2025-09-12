@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
 import { LessorsService } from './lessors.service';
 import { LessorsController } from './lessors.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Lessor, LessorSchema } from './entities/lessor.schema';
 
 @Module({
+  imports: [
+    MongooseModule.forFeature([{name : Lessor.name , schema: LessorSchema}])
+  ],
   controllers: [LessorsController],
   providers: [LessorsService],
 })
