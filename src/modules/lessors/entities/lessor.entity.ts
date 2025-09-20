@@ -45,7 +45,7 @@ export class Lessor {
     telegram : string
 
     @Prop()
-    responsible_person: string
+    owner: string //ref  
 
     @Prop()
     watched : number
