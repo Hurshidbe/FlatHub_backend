@@ -1,4 +1,5 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { useContainer } from "class-validator";
 import { sex } from "src/enums/user.enums";
 
 @Schema()
@@ -10,18 +11,23 @@ export class User {
     full_name : string
 
     @Prop()
-    phone: string  // create custom format
+    phone: number  // create custom format
 
     @Prop()
     password_hash : string
-    
+
+    @Prop()
+    telegram: string  // create custom format
+
     @Prop()
     is_blocked : boolean;
 
     @Prop()
-    tg_username : string  // create custom format
+    phone_verified : boolean;
 
     @Prop()
-    ads : {}  //ref
-
+    ads : string  //ref
 }
+
+export const UserSchema = SchemaFactory.createForClass(User)
+export type  UserDocument = User & Document

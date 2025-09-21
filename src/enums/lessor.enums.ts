@@ -5,7 +5,7 @@ export enum Regions {
   QASHQADARYO = 'Qashqadaryo viloyati',
   NAVOIY = 'Navoiy viloyati',
   NAMANGAN = 'Namangan viloyati',
-  FARGONA = 'Farg\'ona viloyati',
+  FARGONA = "Farg'ona viloyati",
   SIRDARYO = 'Sirdaryo viloyati',
   SURXONDARYO = 'Surxondaryo viloyati',
   SAMARQAND = 'Samarqand viloyati',
@@ -15,7 +15,6 @@ export enum Regions {
 }
 
 export const Districts: Record<Regions, string[]> = {
- 
   [Regions.ANDIJON]: [
     'Andijon tumani', 'Asaka tumani', 'Baliqchi tumani', 'Bo‘ston tumani',
     'Buloqboshi tumani', 'Izboskan tumani', 'Jalaquduq tumani',
@@ -43,7 +42,7 @@ export const Districts: Record<Regions, string[]> = {
   ],
   [Regions.NAVOIY]: [
     'Karmana tumani', 'Konimex tumani', 'Navbahor tumani',
-    'Nurota tumani', 'Tomdi (Tamdy) tumani', 'Uchquduq tumani'
+    'Nurota tumani', 'Tomdi tumani', 'Uchquduq tumani'
   ],
   [Regions.NAMANGAN]: [
     'Chortoq tumani', 'Chust tumani', 'Kosonsoy tumani',
@@ -97,6 +96,7 @@ export const Districts: Record<Regions, string[]> = {
   ],
 };
 
+
 export enum flatorhouse {
     flat = "flat",
     house = "house"
@@ -115,6 +115,8 @@ export enum comforts {
     electrocity = "electrocity",
     water = "water",
     wifi = "wifi",
+    carpets="carpets",
+    curtains = "curtains",
     lift = "lift",
     heating ="heating",
     garage= "garage",
@@ -123,8 +125,5 @@ export enum comforts {
     fridge ="fringe",
     tv= "television",
     balcony="balcony",
-    pet_friendly= "hayvonlar uchun ruhsat",
-    
-
-    
+    pet_friendly= "hayvonlar uchun ruxsat",
 }

@@ -5,16 +5,16 @@ import { comforts, Districts, flatorhouse, for_who, Regions } from "src/enums/le
 
 @Schema()
 export class Lessor {
-    @Prop({type : Regions})
-    region : Regions
+   @Prop({ type: String, enum: Object.values(Regions), required: true })
+  region: Regions;
 
-    @Prop({type : Districts})
+    @Prop()
     district : string
 
     @Prop()
     location : string
 
-    @Prop({type : flatorhouse})
+    @Prop()
     flatorhouse : flatorhouse
 
     @Prop()
@@ -23,16 +23,16 @@ export class Lessor {
     @Prop()
     room_count:number
 
-    @Prop({type: [for_who]})
+    @Prop()
     for_who: for_who[]
 
     @Prop()
     duration : Date
 
-    @Prop({type : comforts})
+    @Prop()
     comforts: comforts
 
-    @Prop({type : [String]})
+    @Prop()
     photos : string[]        // max 6
 
     @Prop()
@@ -54,4 +54,4 @@ export class Lessor {
     likes : number
 }
 
-const LessorSchema = SchemaFactory.createForClass(Lessor)
+export const LessorSchema = SchemaFactory.createForClass(Lessor)    
