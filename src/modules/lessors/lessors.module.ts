@@ -6,6 +6,7 @@ import { Lessor, LessorSchema } from './entities/lessor.entity';
 import { User, UserSchema } from '../users/entities/user.entity';
 
 @Module({
+  
   imports : [
     MongooseModule.forFeature([
       { name: Lessor.name, schema: LessorSchema },
