@@ -16,7 +16,6 @@ export class UsersService {
   async password_hasher(password:string) {
     return bcrypt.hash(password, 12)
   }
-
   async password_compare(inputPassword:string , hashed_password:string){
     return bcrypt.compare(inputPassword , hashed_password)
   }
