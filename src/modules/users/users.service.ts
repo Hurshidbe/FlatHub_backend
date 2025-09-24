@@ -13,12 +13,6 @@ export class UsersService {
   async create(userdata : CreateUserDto){
   return this.userRepo.create(userdata)
   }
-
-
-
-
-
-
   async password_hasher(password:string) {
     return bcrypt.hash(password, 12)
   }
