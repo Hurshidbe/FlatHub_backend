@@ -1,23 +1,26 @@
-import { BadRequestException, CanActivate, ExecutionContext, HttpException, Injectable } from "@nestjs/common";
+import { BadRequestException, CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Observable } from "rxjs";
 
 @Injectable()
-class AuthGuard implements CanActivate{
-    constructor(private jwt : JwtService){}
-    
-    async canActivate(context: ExecutionContext):Promise<boolean> {
-        const req = context.switchToHttp().getRequest();
-        const token = req.cookies.authToken;
-        if(!token) throw new BadRequestException("token not found");
-        try {
-            const decoded = await this.jwt.verifyAsync(token);
-            req.user = decoded;
-            return true
-        } catch (error) {
-            throw new HttpException("token expired. please relogin", error.status)
-        }
-    }
-};
+class AuthGuard implements CanActivate {
+  constructor(private jwt: JwtService) {}
 
-export default AuthGuard
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const req = context.switchToHttp().getRequest();
+    const token = req.cookies?.['authToken'];
+
+    if (!token) {
+      throw new BadRequestException("Token not found");
+    }
+
+    try {
+      const decoded: any = await this.jwt.verifyAsync(token);
+      req.user = decoded;
+      return true;
+    } catch (error) {
+      throw new HttpException("Token expired. Please relogin", HttpStatus.UNAUTHORIZED);
+    }
+  }
+}
+
+export default AuthGuard;

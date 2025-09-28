@@ -14,7 +14,7 @@ export class User {
     phone: number  // create custom format
 
     @Prop()
-    password_hash : string
+    password : string
 
     @Prop()
     telegram: string  // create custom format
