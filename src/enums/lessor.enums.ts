@@ -5,7 +5,7 @@ export enum Regions {
   QASHQADARYO = 'Qashqadaryo viloyati',
   NAVOIY = 'Navoiy viloyati',
   NAMANGAN = 'Namangan viloyati',
-  FARGONA = 'Farg\'ona viloyati',
+  FARGONA = "Farg'ona viloyati",
   SIRDARYO = 'Sirdaryo viloyati',
   SURXONDARYO = 'Surxondaryo viloyati',
   SAMARQAND = 'Samarqand viloyati',
@@ -116,6 +116,8 @@ export enum comforts {
     water = "suv",
     ariston= "arizton",
     wifi = "wifi",
+    carpets="carpets",
+    curtains = "curtains",
     lift = "lift",
     heating ="isitish tizimi",
     garage= "mashina uchun garaj",
@@ -124,6 +126,9 @@ export enum comforts {
     fridge ="muzlatgich",
     tv= "television",
     balcony="balcony",
+<<<<<<< HEAD
+    pet_friendly= "hayvonlar uchun ruxsat",
+=======
     pet_friendly= "hayvonlar uchun ruhsat",
 }
 
@@ -138,4 +143,5 @@ export enum statuses {
   full = "to'lgan",
   half = "joy bor",
   banned = "firbgar"
+>>>>>>> master
 }
