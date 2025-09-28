@@ -13,12 +13,16 @@ export class CreateUserDto {
     @Length(9)
     @IsNotEmpty()
     phone : number;
-
-    @IsNotEmpty()
-    @IsStrongPassword({minLength : 6, minNumbers:1})
-    password_hash : string;
-
+    
     @IsNotEmpty()
     @Length(4,36)
     telegram : string;
+    
+    @IsNotEmpty()
+    @IsStrongPassword({minLength : 6, minNumbers:1})
+    password : string;
+
+    @IsNotEmpty()
+    repeat_password: string
+
 }

@@ -10,8 +10,9 @@ export class UsersController {
   @Post("add")
   async add(@Body() userdata : CreateUserDto){
     try {
-     userdata.password_hash  = await this.usersService.password_hasher(userdata.password_hash) 
-     return await this.usersService.create(userdata)
+     if(userdata.password===userdata.repeat_password)
+        userdata.password  = await this.usersService.password_hasher(userdata.password);
+        return await this.usersService.create(userdata)
     } catch (error) {
       throw new HttpException(error.message , error.status)
     }

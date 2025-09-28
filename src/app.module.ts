@@ -6,11 +6,12 @@ import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from "dotenv"
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from 'nestjs-config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 dotenv.config()
 
 @Module({
   imports: [
+    ConfigModule.forRoot({isGlobal : true , envFilePath : ".env"}),
     MongooseModule.forRoot(process.env.DB_URL || ""),
     LessorsModule, 
     UsersModule,
