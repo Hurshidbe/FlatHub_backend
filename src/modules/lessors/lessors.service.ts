@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLessorDto } from './dto/create-lessor.dto';
 import { UpdateLessorDto } from './dto/update-lessor.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Lessor } from './entities/lessor.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class LessorsService {
-  create(createLessorDto: CreateLessorDto) {
-    return 'This action adds a new lessor';
+constructor(
+  @InjectModel(Lessor.name ) private LessorsRepo : Model<Lessor>
+){}
+
+  async create(createLessorDto: CreateLessorDto) {
+    return this.LessorsRepo.create(createLessorDto)
+   
   }
 
   findAll() {
@@ -23,4 +31,6 @@ export class LessorsService {
   remove(id: number) {
     return `This action removes a #${id} lessor`;
   }
+
+  async ipFinder (){}
 }

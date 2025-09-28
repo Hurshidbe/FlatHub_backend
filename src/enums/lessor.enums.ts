@@ -23,7 +23,7 @@ export const Districts: Record<Regions, string[]> = {
     'Ulug‘nor tumani'
   ],
   [Regions.BUXORO]: [
-    'Alat tumani', 'Buxoro tumani', 'Vobkent tumani', 'G‘ijduvon tumani',
+    'Olot tumani', 'Buxoro tumani', 'Vobkent tumani', 'G‘ijduvon tumani',
     'Jondor tumani', 'Kogon tumani', 'Qorako‘l tumani',
     'Qorovulbozor tumani', 'Peshku tumani', 'Romitan tumani',
     'Shofirkon tumani'
@@ -32,7 +32,7 @@ export const Districts: Record<Regions, string[]> = {
     'Arnasoy tumani', 'Baxmal tumani', 'Do‘stlik tumani',
     'Forish tumani', 'G‘allaorol tumani', 'Mirzacho‘l tumani',
     'Paxtakor tumani', 'Yangiobod tumani', 'Zomin tumani',
-    'Zafarobod tumani', 'Zarbdor tumani', 'Sharaf Rashidov tumani'
+    'Zafarobod tumani', 'Zarbdor tumani', 'Sharof Rashidov tumani'
   ],
   [Regions.QASHQADARYO]: [
     'Chiroqchi tumani', 'Dehqonobod tumani', 'G‘uzor tumani',
@@ -46,7 +46,7 @@ export const Districts: Record<Regions, string[]> = {
   ],
   [Regions.NAMANGAN]: [
     'Chortoq tumani', 'Chust tumani', 'Kosonsoy tumani',
-    'Mingbuloq tumani', 'Namangan tumani', 'Naryn tumani',
+    'Mingbuloq tumani', 'Namangan tumani', 'Norin tumani',
     'Pop tumani', 'To‘raqo‘rg‘on tumani', 'Uchqo‘rg‘on tumani',
     'Uychi tumani', 'Yangiqo‘rg‘on tumani'
   ],
@@ -55,41 +55,41 @@ export const Districts: Record<Regions, string[]> = {
     'Buvayda tumani', 'Dang‘ara tumani', 'Farg‘ona tumani',
     'Furqat tumani', 'Qo‘shtepa tumani', 'Quva tumani',
     'Rishton tumani', 'So‘x tumani', 'Toshloq tumani',
-    'Uchko‘prik tumani', 'Uzbekistan tumani', 'Yozyovon tumani'
+    'Uchko‘prik tumani', 'O‘zbekiston tumani', 'Yozyovon tumani'
   ],
   [Regions.SIRDARYO]: [
-    'Akaltyn tumani', 'Bayaut tumani', 'Guliston tumani',
+    'Oqoltin tumani', 'Boyovut tumani', 'Guliston tumani',
     'Mirzaobod tumani', 'Sayxunobod tumani', 'Sardoba tumani',
-    'Sirdaryo tumani', 'Xavast tumani'
+    'Sirdaryo tumani', 'Xovos tumani'
   ],
   [Regions.SURXONDARYO]: [
     'Angor tumani', 'Bandixon tumani', 'Boysun tumani',
-    'Denov tumani', 'Jarkurgan tumani', 'Muzrabot tumani',
+    'Denov tumani', 'Jarqo‘rg‘on tumani', 'Muzrabot tumani',
     'Oltinsoy tumani', 'Qiziriq tumani', 'Qumqo‘rg‘on tumani',
     'Sariosiyo tumani', 'Sherobod tumani', 'Termiz tumani',
     'Uzun tumani'
   ],
   [Regions.SAMARQAND]: [
-    'Akdarya tumani', 'Bulungur tumani', 'Ishtikhan tumani',
-    'Jomboy tumani', 'Kattakurgan tumani', 'Kushrabad tumani',
-    'Narpay tumani', 'Nurabad tumani', 'Paxtachi tumani',
-    'Payariq tumani', 'Pastdargom tumani', 'Samarqand tumani',
-    'Taylak tumani', 'Urgut tumani'
+    'Oqdaryo tumani', 'Bulung‘ur tumani', 'Ishtixon tumani',
+    'Jomboy tumani', 'Kattaqo‘rg‘on tumani', 'Qo‘shrabot tumani',
+    'Narpay tumani', 'Nurobod tumani', 'Paxtachi tumani',
+    'Payariq tumani', 'Pastdarg‘om tumani', 'Samarqand tumani',
+    'Tayloq tumani', 'Urgut tumani'
   ],
   [Regions.XORAZM]: [
-    'Bog‘ot tumani', 'Gurlan tumani', 'Hazarasp tumani',
-    'Khanka tumani', 'Khiva tumani', 'Shavat tumani',
+    'Bog‘ot tumani', 'Gurlan tumani', 'Hazorasp tumani',
+    'Xonqa tumani', 'Xiva tumani', 'Shovot tumani',
     'Taxtako‘pir tumani', 'Urganch tumani', 'Yangibozor tumani'
   ],
   [Regions.TOSHKENT_VILOYAT]: [
-    'Ahangaran tumani', 'Bekobod tumani', 'Bo‘ka tumani',
-    'Chinaz tumani', 'Oqqo‘rg‘on tumani', 'Parkent tumani',
+    'Ohangaron tumani', 'Bekobod tumani', 'Bo‘ka tumani',
+    'Chinoz tumani', 'Oqqo‘rg‘on tumani', 'Parkent tumani',
     'Piskent tumani', 'Qibray tumani', 'Quyi Chirchiq tumani',
-    'Tashkent tumani', 'Uchko‘prik tumani', 'Yuqori Chirchiq tumani',
+    'Toshkent tumani', 'O‘rtachirchiq tumani', 'Yuqori Chirchiq tumani',
     'Yangiyo‘l tumani', 'Zangiota tumani', 'Qo‘yichirchiq tumani'
   ],
   [Regions.TOSHKENT_SHAHAR]: [
-    'Bektemir tumani', 'Chilanzor tumani', 'Mirzo Ulug‘bek tumani',
+    'Bektemir tumani', 'Chilonzor tumani', 'Mirzo Ulug‘bek tumani',
     'Mirobod tumani', 'Olmazor tumani', 'Sergeli tumani',
     'Shayxontohur tumani', 'Uchtepa tumani', 'Yakkasaroy tumani',
     'Yashnobod tumani', 'Yunusobod tumani'
@@ -110,20 +110,38 @@ export enum for_who  {
 }
 
 export enum comforts {
-    free_communal = "free communals",
+    free_communal = "kommunallar tekin",
     gas = "gas",
-    electrocity = "electrocity",
-    water = "water",
+    electrocity = "elektr toki",
+    water = "suv",
+    ariston= "arizton",
     wifi = "wifi",
     carpets="carpets",
     curtains = "curtains",
     lift = "lift",
-    heating ="heating",
-    garage= "garage",
-    conditioner = "conditioner",
-    washing_machine = "washing machine",
-    fridge ="fringe",
+    heating ="isitish tizimi",
+    garage= "mashina uchun garaj",
+    conditioner = "konditsioner",
+    washing_machine = "kir yuvish mashinasi",
+    fridge ="muzlatgich",
     tv= "television",
     balcony="balcony",
+<<<<<<< HEAD
     pet_friendly= "hayvonlar uchun ruxsat",
+=======
+    pet_friendly= "hayvonlar uchun ruhsat",
+}
+
+export enum currency {
+  uzs = "UZS",
+  usd= "USD",
+  eur= "EUR"
+}
+
+export enum statuses {
+  free = "bo'sh",
+  full = "to'lgan",
+  half = "joy bor",
+  banned = "firbgar"
+>>>>>>> master
 }

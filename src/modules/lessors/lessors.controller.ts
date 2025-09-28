@@ -1,19 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request, Req } from '@nestjs/common';
 import { LessorsService } from './lessors.service';
 import { CreateLessorDto } from './dto/create-lessor.dto';
 import { UpdateLessorDto } from './dto/update-lessor.dto';
+import { request } from 'express';
 
 @Controller('lessors')
 export class LessorsController {
   constructor(private readonly lessorsService: LessorsService) {}
 
   @Post()
-  create(@Body() createLessorDto: CreateLessorDto) {
-    return this.lessorsService.create(createLessorDto);
+  create(@Body() createLessorDto: CreateLessorDto ,@Req() req : any) {
+    console.log(req.ip)
+    return this.lessorsService.create({...createLessorDto, });
   }
 
   @Get()
-  findAll() {
+  findAll(@Req() req : any) {
+     console.log(req.ip)
     return this.lessorsService.findAll();
   }
 
