@@ -12,7 +12,6 @@ export class UsersService {
     @InjectModel(User.name) private readonly userRepo : Model<UserDocument>){}
 
   async create(userdata : CreateUserDto){
-    console.log(userdata)
     return this.userRepo.create(userdata)
   };
 

@@ -1,8 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, Res, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpException,
+  Res,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, LoginDto } from './dto/create-user.dto';
 import { Response, response } from 'express';
 import AuthGuard from '../../guards/autthGuard';
+import { ResponseInterceptor } from '../../response/response.interceptor';
 
 @Controller('users')
 export class UsersController {
@@ -20,23 +33,27 @@ export class UsersController {
   }
 
   @Post("login")
-  async  login(@Body() body: LoginDto, @Res() res : any){
-   try {
-     const {message , token} = await this.usersService.login(body);
-      res.cookie("authToken", token , {httpOnly : true ,});
-      return res.send(message)
-   } catch (error) {
-    throw  new HttpException(error.message , error.status)
-   }
+  async login(
+    @Body() body: LoginDto,
+    @Res({ passthrough: true }) res: any,
+  ) {
+    try {
+      const { message, token } = await this.usersService.login(body);
+      res.cookie("authToken", token, { httpOnly: true });
+      return { message };
+    } catch (error) {
+      throw new HttpException(error.message, error.status);
+    }
   }
+
 
   @UseGuards(AuthGuard)
   @Get()
-  async sayhello(@Res() res: any){
+  async sayhello(){
     try {
-      res.send("hello")
+     return "hello"
     }catch (erroe){
-      res.send("fuck you")
+  return  'fuck nigers'
     }
   }
 }
