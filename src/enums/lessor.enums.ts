@@ -110,9 +110,10 @@ export enum for_who  {
 }
 
 export enum comforts {
+    all_equipments = "with all equipments",
     free_communal = "free communals",
     gas = "gas",
-    electrocity = "electrocity",
+    electricity = "electrecity",
     water = "water",
     wifi = "wifi",
     carpets="carpets",
@@ -122,8 +123,9 @@ export enum comforts {
     garage= "garage",
     conditioner = "conditioner",
     washing_machine = "washing machine",
+    sofa="sofas",
     fridge ="fringe",
-    tv= "television",
+    television= "television",
     balcony="balcony",
-    pet_friendly= "hayvonlar uchun ruxsat",
+    pet_friendly= "access to feeding pets",
 }

@@ -35,10 +35,18 @@ export class UsersService {
     return {message : "success"  , token : token}
   };
 
+  async phoneVerifier(phone : string){
+    return await this.userRepo.findOneAndUpdate({phone}, {phone_verified:true}, {new:true})
+  }
+
   async password_hasher(password:string) {
     return bcrypt.hash(password, 12)
   };
   async password_compare(inputPassword:string , hashed_password:string){
     return bcrypt.compare(inputPassword , hashed_password)
+  }
+
+  async customPhoneNumber (number: string){
+    return await `998${number}`
   }
 }

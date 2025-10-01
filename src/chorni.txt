@@ -1,0 +1,4 @@
+if (!userdata.phone_verified) {
+     if(userdata.password===userdata.repeat_password)
+        userdata.password  = await this.usersService.password_hasher(userdata.password);
+        return await this.usersService.create(userdata)

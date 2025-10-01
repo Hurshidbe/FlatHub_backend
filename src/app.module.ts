@@ -1,23 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LessorsModule } from './modules/lessors/lessors.module';
 import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from "dotenv"
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SmsModule } from './modules/sms/sms.module';
+import { SmsService } from './modules/sms/sms.service';
+import { HttpModule, HttpService } from '@nestjs/axios';
 dotenv.config()
 
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal : true , envFilePath : ".env"}),
     MongooseModule.forRoot(process.env.DB_URL || ""),
-    LessorsModule, 
     UsersModule,
     JwtModule.registerAsync({
       global : true,
-      imports : [ConfigModule],
+      imports : [ConfigModule, HttpModule, UsersModule , SmsModule],
       inject : [ConfigService],
       useFactory:(config_service : ConfigService)=>{
         return {
@@ -25,9 +26,10 @@ dotenv.config()
           signOptions: {expiresIn: "1h"}
         }
       }
-    })
+    }),
+    SmsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService ],
 })
 export class AppModule {}

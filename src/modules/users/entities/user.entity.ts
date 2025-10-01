@@ -1,32 +1,31 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { useContainer } from "class-validator";
 import { sex } from "src/enums/user.enums";
 
 @Schema()
 export class User {
-    @Prop()
-    sex: sex
+  @Prop()
+  sex: sex;
 
-    @Prop()
-    full_name : string
+  @Prop()
+  full_name: string;
 
-    @Prop()
-    phone: number  // create custom format
+  @Prop()
+  phone: string; // create custom format
 
-    @Prop()
-    password : string
+  @Prop()
+  password: string;
 
-    @Prop()
-    telegram: string  // create custom format
+  @Prop()
+  telegram: string; // create custom format
 
-    @Prop()
-    is_blocked : boolean;
+  @Prop({ default: false })
+  is_blocked: boolean;
 
-    @Prop()
-    phone_verified : boolean;
+  @Prop({ default: false })
+  phone_verified: boolean;
 
-    @Prop()
-    ads : string  //ref
+  @Prop()
+  ads: string; //ref
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
