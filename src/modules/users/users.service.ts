@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { CreateUserDto, LoginDto } from './dto/create-user.dto';
+import { UserDto, LoginDto, ChangePasswordDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import  bcrypt from "bcrypt"
 import { InjectModel } from '@nestjs/mongoose';
@@ -11,11 +11,12 @@ export class UsersService {
   constructor(private jwt: JwtService,
     @InjectModel(User.name) private readonly userRepo : Model<UserDocument>){}
 
-  async create(userdata : CreateUserDto){
+  async create(userdata : UserDto){
     return this.userRepo.create(userdata)
   };
 
   async login(userdata: LoginDto){
+    userdata.phone=`998${userdata.phone}`.toString()
     const user = await this.userRepo.findOne({ phone: userdata.phone });
     if (!user)
       throw new HttpException('phone number or password incorrect', 402);
@@ -25,12 +26,13 @@ export class UsersService {
       user.password,
     );
     if (!iscompared)
-      throw new HttpException('phone number or password incorrect', 402);
+      throw new HttpException('password incorrect', 402);
     const  token = await  this.jwt.signAsync({
       id : user._id,
       full_name : user.full_name,
       sex : user.sex,
-      telegram : user.telegram
+      telegram : user.telegram,
+      phone: user.phone
     })
     return {message : "success"  , token : token}
   };
@@ -48,5 +50,20 @@ export class UsersService {
 
   async customPhoneNumber (number: string){
     return await `998${number}`
+  }
+
+  async customTelegramLink (username : string){
+    return  `https://t.me/${username}`
+  }
+  
+  async changePassword(body: ChangePasswordDto, userdata : any){
+    if(body.newPassword === body.reNewPassword){
+      const user = await  this.userRepo.findOne({phone:userdata.phone})
+      if(user){
+       const passwordCheck  = await bcrypt.compare(body.oldPassword, user.password)
+        const  password = await  bcrypt.hash(body.reNewPassword, 12)
+       if(passwordCheck) return await this.userRepo.findOneAndUpdate({phone : userdata.phone}, {password})
+      }
+    }
   }
 }

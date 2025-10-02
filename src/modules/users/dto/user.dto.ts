@@ -12,7 +12,7 @@ import {
 } from 'class-validator';
 import { sex } from "src/enums/user.enums";
 
-export class CreateUserDto {
+export class UserDto {
   @IsEnum(sex)
   @IsOptional()
   sex : string;
@@ -41,14 +41,32 @@ export class CreateUserDto {
   phone_verified : boolean
 }
 
+
+
+
+
 export class LoginDto {
 
-  @Min(99999999)
-  @Max(999999999)
-  phone : number;
+  @Length(9)
+  phone : string;
+
+  @IsNotEmpty()
+  password: string;
+
+}
+
+
+
+
+export class ChangePasswordDto {
+  @IsNotEmpty()
+  oldPassword: string;
 
   @IsNotEmpty()
   @IsStrongPassword({minLength : 6, minNumbers:1})
-  password: string;
+  newPassword: string;
 
+  @IsNotEmpty()
+  @IsStrongPassword({minLength : 6, minNumbers:1})
+  reNewPassword: string;
 }

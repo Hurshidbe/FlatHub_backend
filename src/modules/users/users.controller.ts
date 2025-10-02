@@ -10,9 +10,10 @@ import {
   Res,
   UseGuards,
   UseInterceptors,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, LoginDto } from './dto/create-user.dto';
+import { UserDto, LoginDto, ChangePasswordDto } from './dto/user.dto';
 import { Response, response } from 'express';
 import AuthGuard from '../../guards/autthGuard';
 import { ResponseInterceptor } from '../../response/response.interceptor';
@@ -26,7 +27,7 @@ export class UsersController {
               private readonly SmsService : SmsService) {}
 
   @Post("auth")
-  async add(@Body() userdata : CreateUserDto){
+  async add(@Body() userdata : UserDto){
     
   try {
      if (!userdata.phone_verified) {
@@ -35,6 +36,7 @@ export class UsersController {
         }
         userdata.password = await this.usersService.password_hasher(userdata.password)
        userdata.phone = await  this.usersService.customPhoneNumber(userdata.phone)
+       userdata.telegram = await  this.usersService.customTelegramLink(userdata.telegram)
         const user = await this.usersService.create(userdata);
         await this.SmsService.sendSms(userdata.phone, custom_message);
       }
@@ -59,14 +61,32 @@ export class UsersController {
     }
   }
 
-
   @UseGuards(AuthGuard)
-  @Get()
-  async sayhello(){
+  @Patch('change-pass')
+  async change_pass(@Req() req:any,@Body() body: ChangePasswordDto){
     try {
-     return "hello"
-    }catch (error){
-  return  'fuck nigers'
+      return await this.usersService.changePassword(body, req.user)
+    }catch(error){
+      console.log(error)
+      throw  new HttpException(error.message , error.status)
     }
   }
+
+  /// get my ads
+
+  /// get my ad byid
+
+  /// edit my ad byid
+
+  /// delete my ad byid
+
+  /// logout
+
+  /// edit my info
+
+  /// logout
+
+
+
+
 }
