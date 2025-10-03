@@ -10,13 +10,16 @@ export class User {
   full_name: string;
 
   @Prop()
-  phone: string; // create custom format
+  phone: string;
 
   @Prop()
   password: string;
 
   @Prop()
-  telegram: string; // create custom format
+  telegram: string; 
+  
+  @Prop({default:"empty"})
+  bio : string
 
   @Prop({ default: false })
   is_blocked: boolean;

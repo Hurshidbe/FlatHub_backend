@@ -52,18 +52,20 @@ export class UsersService {
     return await `998${number}`
   }
 
-  async customTelegramLink (username : string){
-    return  `https://t.me/${username}`
-  }
   
   async changePassword(body: ChangePasswordDto, userdata : any){
     if(body.newPassword === body.reNewPassword){
       const user = await  this.userRepo.findOne({phone:userdata.phone})
       if(user){
        const passwordCheck  = await bcrypt.compare(body.oldPassword, user.password)
+       if(!passwordCheck) {throw new HttpException("your password is incorrect",403)}
         const  password = await  bcrypt.hash(body.reNewPassword, 12)
-       if(passwordCheck) return await this.userRepo.findOneAndUpdate({phone : userdata.phone}, {password})
+       if(passwordCheck) return await this.userRepo.findOneAndUpdate({phone : userdata.phone}, {password}, {new :true})
       }
     }
+  }
+
+  async editProfile(body : UpdateUserDto, id : string){
+    return await this.userRepo.findByIdAndUpdate(id , body , {new : true})
   }
 }

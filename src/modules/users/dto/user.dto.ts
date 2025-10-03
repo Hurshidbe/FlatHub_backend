@@ -29,6 +29,11 @@ export class UserDto {
   @Length(4,36)
   telegram : string;
 
+  @IsOptional()
+  @IsString()
+  @Length(0, 255)
+  bio? : string
+
   @IsNotEmpty()
   @IsStrongPassword({minLength : 6, minNumbers:1})
   password : string;

@@ -2,6 +2,7 @@ import { PartialType } from '@nestjs/mapped-types';
 import { UserDto } from './user.dto';
 import { IsNotEmpty, IsNotEmptyObject, IsOptional, IsStrongPassword, Length } from 'class-validator';
 import { sex } from 'src/enums/user.enums';
+import { isOptionalChain } from 'typescript';
 
 export class UpdateUserDto extends PartialType(UserDto) {
 
@@ -14,10 +15,10 @@ export class UpdateUserDto extends PartialType(UserDto) {
         phone : string;
     
         @IsOptional()
-        @IsStrongPassword({minLength : 6, minNumbers:1})
-        password_hash : string;
-    
-        @IsOptional()
         @Length(4,36)
         telegram : string;
+
+        @IsNotEmpty()
+        @Length(0,255)
+        bio : string
 }
