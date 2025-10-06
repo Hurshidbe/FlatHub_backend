@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { sex } from "src/enums/user.enums";
+import mongoose from 'mongoose';
 
 @Schema()
 export class User {
@@ -16,8 +17,8 @@ export class User {
   password: string;
 
   @Prop()
-  telegram: string; 
-  
+  telegram: string;
+
   @Prop({default:"empty"})
   bio : string
 
@@ -27,8 +28,8 @@ export class User {
   @Prop({ default: false })
   phone_verified: boolean;
 
-  @Prop()
-  ads: string; //ref
+  @Prop({type: mongoose.Schema.ObjectId, ref : 'Add'})
+  ads: mongoose.Types.ObjectId[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

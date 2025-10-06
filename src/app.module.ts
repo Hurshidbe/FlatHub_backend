@@ -9,6 +9,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SmsModule } from './modules/sms/sms.module';
 import { SmsService } from './modules/sms/sms.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
+import { AddsModule } from './modules/adds/adds.module';
 dotenv.config()
 
 @Module({
@@ -27,7 +28,8 @@ dotenv.config()
         }
       }
     }),
-    SmsModule
+    SmsModule,
+    AddsModule
   ],
   controllers: [AppController],
   providers: [AppService ],

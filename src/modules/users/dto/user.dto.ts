@@ -13,9 +13,9 @@ import {
 import { sex } from "src/enums/user.enums";
 
 export class UserDto {
-  @IsEnum(sex)
-  @IsOptional()
-  sex : string;
+  @IsEnum(sex, {each : true})
+  @IsNotEmpty()
+  sex : sex;
 
   @IsNotEmpty()
   @Length(4, 50)
