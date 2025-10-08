@@ -29,6 +29,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^11.0.3",
     "@nestjs/platform-express": "^11.0.1",
+    "@types/multer": "^2.0.0",
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
     "class-transform": "^0.7.0",
@@ -39,9 +40,11 @@
     "dotenv": "^17.2.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.1",
+    "nestjs": "^0.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "throttler": "^0.0.1"
+    "throttler": "^0.0.1",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

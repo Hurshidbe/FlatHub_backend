@@ -10,6 +10,7 @@ import { SmsModule } from './modules/sms/sms.module';
 import { SmsService } from './modules/sms/sms.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { AddsModule } from './modules/adds/adds.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 dotenv.config()
 
 @Module({
@@ -19,7 +20,7 @@ dotenv.config()
     UsersModule,
     JwtModule.registerAsync({
       global : true,
-      imports : [ConfigModule, HttpModule, UsersModule , SmsModule],
+      imports : [ConfigModule, HttpModule, UsersModule , SmsModule , CloudinaryModule],
       inject : [ConfigService],
       useFactory:(config_service : ConfigService)=>{
         return {
@@ -29,7 +30,8 @@ dotenv.config()
       }
     }),
     SmsModule,
-    AddsModule
+    AddsModule,
+    CloudinaryModule
   ],
   controllers: [AppController],
   providers: [AppService ],

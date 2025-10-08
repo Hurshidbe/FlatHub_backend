@@ -8,7 +8,7 @@ import { Add, AddDocument } from './entities/add.entity';
 export class AddsService {
   constructor(@InjectModel(Add.name) private AddRepo: Model<AddDocument>) {}
 
-  async create(body: CreateAddDto, userId: string) {
+  async create(body: CreateAddDto, userId: string) {  
     return await  this.AddRepo.create({...body,  owner : userId })
   }
 

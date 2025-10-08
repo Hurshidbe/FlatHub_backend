@@ -1,11 +1,18 @@
 import {
+  ArrayMaxSize,
+  IsArray,
+  IsDateString,
   IsEnum,
   IsNotEmpty, IsNumber,
+  IsObject,
   IsOptional,
   IsString,
+  Length,
 } from 'class-validator';
 import { comforts, flatorhouse, for_who, Regions } from '../../../enums/lessor.enums';
-import mongoose from 'mongoose';
+import mongoose, { isValidObjectId } from 'mongoose';
+import { Transform, Type } from 'class-transformer';
+
 
 export class CreateAddDto {
   @IsEnum(Regions)
@@ -16,43 +23,71 @@ export class CreateAddDto {
   district: string;
 
   @IsNotEmpty()
+   @Transform(({ value }) => {
+    try {
+      return typeof value === 'string' ? JSON.parse(value) : value;
+    } catch {
+      return value;
+    }
+  })
   location: { lat: number; lng: number };
 
   @IsNotEmpty()
   @IsEnum(flatorhouse)
-  flatorhouse: flatorhouse
+  flatorhouse: flatorhouse;
 
   @IsOptional()
-  floor? : number[]
+  floor?: number[];
 
   @IsNotEmpty()
+  @Type(() => Number)
   @IsNumber()
-  room_count : number
+  room_count: number;
+
 
   @IsNotEmpty()
+  @Transform(({ value }) => {
+    try {
+      return typeof value === 'string' ? JSON.parse(value) : value;
+    } catch {
+      return value;
+    }
+  })
   @IsEnum(for_who, { each: true })
   for_who: for_who[];
 
   @IsOptional()
-  duration? : Date
+  @IsDateString()
+  duration?: Date;
 
   @IsNotEmpty()
+  @Transform(({ value }) => {
+    try {
+      return typeof value === 'string' ? JSON.parse(value) : value;
+    } catch {
+      return value;
+    }
+  })
   @IsEnum(comforts, { each: true })
   comforts: comforts[];
 
-
-  @IsNotEmpty()
+  @IsOptional()
+  @IsArray()
   @IsString({ each: true })
-  photos: string[];
-
+  @ArrayMaxSize(6)
+  photos?: string[];
 
   @IsNotEmpty()
+  @Type(() => Number)
   @IsNumber()
-  price : number
+  price: number;
 
+
+  @IsOptional()
   @IsString()
-  owner : mongoose.Types.ObjectId
+  @Length(1,255)
+  extra_info? : string
 
+  @IsOptional()
+  owner?: mongoose.Types.ObjectId;
 }
-
-

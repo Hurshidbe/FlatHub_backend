@@ -1,17 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { useContainer } from "class-validator";
-import mongoose, { DateToString, Model, Mongoose } from 'mongoose';
-import { comforts, Districts, flatorhouse, for_who, Regions } from "src/enums/lessor.enums";
-import { User } from '../../users/entities/user.entity';
-
-class Location {
-  @Prop({ required: true })
-  lat: number;
-
-  @Prop({ required: true })
-  lng: number;
-}
-
+import mongoose from "mongoose";
+import { comforts, Districts, flatorhouse, for_who,  Regions } from "src/enums/lessor.enums";
 
 @Schema()
 export class Add {
@@ -19,52 +8,55 @@ export class Add {
   region: Regions;
 
   @Prop()
-  district: string;
-
-  @Prop()
-  location: Location;
-
-
-@Prop()
-  flatorhouse: flatorhouse;
+  district : string
 
   @Prop({
-    required: function () {
-      return this.flatorhouse === 'flat';
-    },
+  type: {
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true },
+     },
+    required: true,
   })
-  floor: number[];
+  location: {lat : number , lng: number};
 
   @Prop()
-  room_count: number;
+  flatorhouse : flatorhouse
+
+  @Prop({required:false})
+  floor?: number[]
 
   @Prop()
-  for_who: for_who[];
+  room_count:number
 
   @Prop()
-  duration: Date;
-
-  @Prop({ default: '' })
-  comforts: comforts[];
+  for_who: for_who[]
 
   @Prop()
-  photos: string[];
+  duration : Date
 
   @Prop()
-  price: number;
+  comforts: comforts[]
 
-  @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
-  owner: mongoose.Types.ObjectId | User;
-  ///////////////////////////////////////////////////////////////
-  @Prop({ default: 0 })
-  watched: number;
+ @Prop({ type: [String], default: [] })
+  photos: string[];     // max 6
 
-  @Prop({ default: 0 })
-  likes: number;
+  @Prop()
+  price : number 
 
-  @Prop({default : 0})
-  dislikes : number
+  @Prop({required: false})
+  extra_info:string
+  ////////////////////////////////////
+
+  @Prop()
+  owner: mongoose.Types.ObjectId
+
+  @Prop()
+  watched : number
+
+  @Prop()
+  likes : number
 }
 
 export const AddSchema= SchemaFactory.createForClass(Add)
-export type  AddDocument = Add & Document
+
+export type AddDocument = Add&Document

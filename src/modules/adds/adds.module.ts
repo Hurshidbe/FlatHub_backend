@@ -3,6 +3,7 @@ import { AddsService } from './adds.service';
 import { AddsController } from './adds.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Add, AddSchema } from './entities/add.entity';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Module({
   imports :[
@@ -11,6 +12,6 @@ import { Add, AddSchema } from './entities/add.entity';
     ])
   ],
   controllers: [AddsController],
-  providers: [AddsService],
+  providers: [AddsService, CloudinaryService],
 })
 export class AddsModule {}

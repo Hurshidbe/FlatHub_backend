@@ -12,7 +12,7 @@ async function bootstrap() {
   app.use(cookieParser())
   app.useGlobalInterceptors(new ResponseInterceptor())
   app.setGlobalPrefix(process.env.API as string)
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe({ transform: true }))
   await app.listen(process.env.PORT ?? 3000);
   console.warn(`server is running on ${process.env.PORT}`)
 }
