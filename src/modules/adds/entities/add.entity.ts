@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
-import { comforts, Districts, flatorhouse, for_who,  Regions } from "src/enums/lessor.enums";
+import { comforts, Districts, flatorhouse, for_who,  Regions, rentorsell } from "src/enums/lessor.enums";
 
 @Schema()
 export class Add {
@@ -20,10 +20,19 @@ export class Add {
   location: {lat : number , lng: number};
 
   @Prop()
+  rentorsale : string
+
+  @Prop()
   flatorhouse : flatorhouse
 
-  @Prop({required:false})
-  floor?: number[]
+ @Prop({
+  type: {
+    max: { type: Number, required: true },
+    at: { type: Number, required: true },
+     },
+    required: true,
+  })
+  floor: {max : number , at: number};
 
   @Prop()
   room_count:number

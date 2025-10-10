@@ -14,6 +14,7 @@ export enum Regions {
   TOSHKENT_SHAHAR = 'Toshkent shahri',
 }
 
+export enum rentorsell {rent ='rent',sell ='sell'}
 export const Districts: Record<Regions, string[]> = {
   [Regions.ANDIJON]: [
     'Andijon tumani', 'Asaka tumani', 'Baliqchi tumani', 'Bo‘ston tumani',
@@ -104,7 +105,7 @@ export enum flatorhouse {
 
 
 export enum for_who  {
-    family = "for family",
+    family = "family",
     male = "male",
     female = "female"
 }
@@ -127,6 +128,12 @@ export enum comforts {
     fridge ="fridge",
     television= "television",
     balcony="balcony",
-    pet_friendly= "access to feeding pets",
+    pet_friendly= "access feeding pets",
+    yard= "yard"
+}
+
+export  enum roles {
+  user = 'user',
+  admin = 'admin'
 }
 

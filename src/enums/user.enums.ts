@@ -3,7 +3,3 @@ export enum sex {
     female = "female",
 }
 
-export enum roles {
-  admin = "admin",
-  user = "user",
-}

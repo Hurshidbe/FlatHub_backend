@@ -1,8 +1,12 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   HttpException,
+  Param,
+  Patch,
   Post,
+  Query,
   Req,
   UploadedFiles,
   UseGuards,
@@ -13,6 +17,9 @@ import { CreateAddDto } from './dto/createAdd.dto';
 import AuthGuard from '../../guards/autthGuard';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { parseArgs } from 'node:util';
+import mongoose from 'mongoose';
+import { UpdateAddDto } from './dto/updateAdd.dto';
 
 @UseGuards(AuthGuard)
 @Controller('adds')
@@ -27,11 +34,36 @@ export class AddsController {
     @Req() req:any
   ){
    try {
-     const userId = await  req.user._id as string
+     const userId = await  req.user.id as string
      body.photos = await this.cloudService.upload(photos)
      return this.addsService.create(body, userId);
      } catch(error){
+      console.log(error)
        throw new HttpException(error.message , error.status)
      }
+  }
+
+  @Patch()
+  @UseInterceptors(FilesInterceptor('photos'))
+  async  update(
+    @Query('id') id : string,
+    @UploadedFiles() photos : Express.Multer.File[],
+    @Body() body : UpdateAddDto,
+    @Req() req : any
+  ){
+   try {
+     if(mongoose.isValidObjectId(id)){
+       const  userId = req.user.id
+       if(photos?.length)
+       body.photos = await  this.cloudService.upload(photos)
+       if (body.photo) {
+         body.photos = body.photos || [];
+         body.photos.push(body.photo);
+       }
+       return this.addsService.update(id , body, userId)
+     }
+   }catch (error) {
+     throw  new HttpException(error.message , error.status)
+   }
   }
 }
