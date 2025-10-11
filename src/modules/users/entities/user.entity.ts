@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { sex } from "src/enums/user.enums";
+import { roles, sex } from "src/enums/user.enums";
 import mongoose from 'mongoose';
-import { roles } from '../../../enums/lessor.enums';
 
 @Schema()
 export class User {

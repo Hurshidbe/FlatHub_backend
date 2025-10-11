@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   HttpException,
   Param,
   Patch,
@@ -20,6 +21,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { parseArgs } from 'node:util';
 import mongoose from 'mongoose';
 import { UpdateAddDto } from './dto/updateAdd.dto';
+import { error } from 'node:console';
 
 @UseGuards(AuthGuard)
 @Controller('adds')
@@ -65,5 +67,25 @@ export class AddsController {
    }catch (error) {
      throw  new HttpException(error.message , error.status)
    }
+  }
+
+  
+  @Get()
+  async read(@Query('id') id : string, @Req() req : any){
+    try {
+      return await this.addsService.findOne(id, req.user.id)
+    } catch (error) {
+      throw new HttpException(error.message , error.status
+      )
+    }
+  }
+
+  @Get('all')
+  async all(@Req() req : any){
+    try {
+      return this.addsService.getAll(req.user.id)
+    } catch (error) {
+      throw new HttpException(error.message , error.status)
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
-import { comforts, Districts, flatorhouse, for_who,  Regions, rentorsell } from "src/enums/lessor.enums";
+import { comforts,  flatorhouse, for_who,  Regions, rentorsell } from "src/enums/add.enums";
 
 @Schema()
 export class Add {

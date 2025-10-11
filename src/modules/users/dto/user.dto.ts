@@ -11,7 +11,6 @@ import {
   Min,
 } from 'class-validator';
 import { sex } from "src/enums/user.enums";
-import { roles } from '../../../enums/lessor.enums';
 
 export class UserDto {
   @IsEnum(sex, {each : true})

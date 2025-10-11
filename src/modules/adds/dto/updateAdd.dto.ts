@@ -9,7 +9,7 @@
   IsString,
   Length,
 } from 'class-validator';
-import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/lessor.enums';
+import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/add.enums';
 import { Transform, Type } from 'class-transformer';
 
 export class UpdateAddDto {

@@ -21,24 +21,32 @@ export class AddsService {
     return await  this.AddRepo.create({...body,  owner : userId })
   }
 
+ async update(addId: string, body: UpdateAddDto, userId: string) {
+    if(await this.isOwnAdd(addId, userId))
+    return await this.AddRepo.findByIdAndUpdate(addId, body, { new: true });
+}
+
+  async findOne(addId: string , userId: string){
+    if(await this.isOwnAdd(addId, userId))
+    return await this.AddRepo.findById(addId);
+}
+
+  async getAll(userId : string){
+     return this.AddRepo.find({owner:userId})
+  }
+
+  async isOwnAdd(addId: string , userId : string){
+    const add = await this.AddRepo.findById(addId);
+      if (!add) throw new NotFoundException('Add not found')
+      if (add.owner.toString() !== userId) throw  new BadRequestException('You can update only your own adds')
+      return true
+  }
   async mapUrlCreator(lat: number, lng: number) {
     const baseUrl = 'https://www.google.com/maps?q=';
     return `${baseUrl}${lat},${lng}`;
   }
 
-  async update(
-    addId: string,
-    body: UpdateAddDto,
-    userId: string,
-  ) {
-    try {
-      const add = await this.AddRepo.findById(addId);
-      if (!add) throw new NotFoundException('Add not found')
-      if (add.owner.toString() !== userId.toString()) throw  new BadRequestException('You can update only your own adds')
-      return this.AddRepo.findByIdAndUpdate(addId, body, { new: true });
-    } catch (error) {
-      throw new HttpException(error.message, error.status || 500);
-    }
-  }
+
+
 
 }

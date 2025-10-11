@@ -9,7 +9,7 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/lessor.enums';
+import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/add.enums';
 import mongoose, { isValidObjectId } from 'mongoose';
 import { Transform, Type } from 'class-transformer';
 
