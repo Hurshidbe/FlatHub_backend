@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
-import { comforts,  flatorhouse, for_who,  Regions, rentorsell } from "src/enums/add.enums";
+import { Comforts, Flatorhouse, For_who, Regions } from "src/enums/add.enums";
 
 @Schema()
 export class Add {
@@ -10,20 +10,14 @@ export class Add {
   @Prop()
   district : string
 
-  @Prop({
-  type: {
-    lat: { type: Number, required: true },
-    lng: { type: Number, required: true },
-     },
-    required: true,
-  })
-  location: {lat : number , lng: number};
+  @Prop()
+  location: string;
 
   @Prop()
   rentorsale : string
 
   @Prop()
-  flatorhouse : flatorhouse
+  flatorhouse : Flatorhouse
 
  @Prop({
   type: {
@@ -38,13 +32,13 @@ export class Add {
   room_count:number
 
   @Prop()
-  for_who: for_who[]
+  for_who: For_who[]
 
   @Prop()
   duration : Date
 
   @Prop()
-  comforts: comforts[]
+  comforts: Comforts[]
 
  @Prop({ type: [String], default: [] })
   photos: string[];     // max 6
@@ -59,10 +53,13 @@ export class Add {
   @Prop()
   owner: mongoose.Types.ObjectId
 
-  @Prop()
+  @Prop({default : []})
+  reports : string[]
+
+  @Prop({default:0})
   watched : number
 
-  @Prop()
+  @Prop({default : 0})
   likes : number
 }
 

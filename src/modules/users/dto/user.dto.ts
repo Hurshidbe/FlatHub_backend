@@ -10,12 +10,12 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { sex } from "src/enums/user.enums";
+import { sex } from 'src/enums/user.enums';
 
 export class UserDto {
-  @IsEnum(sex, {each : true})
-  @IsNotEmpty()
-  sex : sex;
+  @IsEnum(sex)
+  @IsOptional()
+  sex : string;
 
   @IsNotEmpty()
   @Length(4, 50)
@@ -29,10 +29,9 @@ export class UserDto {
   @Length(4,36)
   telegram : string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  @Length(0, 255)
-  bio? : string
+  bio : string
 
   @IsNotEmpty()
   @IsStrongPassword({minLength : 6, minNumbers:1})

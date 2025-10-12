@@ -9,8 +9,8 @@
   IsString,
   Length,
 } from 'class-validator';
-import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/add.enums';
 import { Transform, Type } from 'class-transformer';
+import { Comforts, Flatorhouse, For_who, Regions, rentorsell } from 'src/enums/add.enums';
 
 export class UpdateAddDto {
   @IsOptional()
@@ -33,8 +33,8 @@ export class UpdateAddDto {
   location?: { lat: number; lng: number };
 
   @IsOptional()
-  @IsEnum(flatorhouse)
-  flatorhouse?: flatorhouse;
+  @IsEnum(Flatorhouse)
+  flatorhouse?: Flatorhouse;
 
   @IsOptional()
      @Transform(({ value }) => {
@@ -64,8 +64,8 @@ export class UpdateAddDto {
     }
   })
   @IsArray()
-  @IsEnum(for_who, { each: true })
-  for_who?: for_who[];
+  @IsEnum(For_who, { each: true })
+  for_who?: For_who[];
 
   @IsOptional()
   @IsDateString()
@@ -80,8 +80,8 @@ export class UpdateAddDto {
     }
   })
   @IsArray()
-  @IsEnum(comforts, { each: true })
-  comforts?: comforts[];
+  @IsEnum(Comforts, { each: true })
+  comforts?: Comforts[];
 
   @IsOptional()
   @IsArray()

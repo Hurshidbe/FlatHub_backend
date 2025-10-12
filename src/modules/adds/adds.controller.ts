@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   Param,
@@ -45,11 +46,11 @@ export class AddsController {
      }
   }
 
-  @Patch()
+  @Patch(':id')
   @UseInterceptors(FilesInterceptor('photos'))
   async  update(
-    @Query('id') id : string,
     @UploadedFiles() photos : Express.Multer.File[],
+    @Param('id') id : string,
     @Body() body : UpdateAddDto,
     @Req() req : any
   ){
@@ -70,15 +71,16 @@ export class AddsController {
   }
 
   
-  @Get()
-  async read(@Query('id') id : string, @Req() req : any){
-    try {
-      return await this.addsService.findOne(id, req.user.id)
-    } catch (error) {
-      throw new HttpException(error.message , error.status
-      )
-    }
+  @Get(':id')
+  async read(@Param('id') id: string, @Req() req: any) {
+  try {
+    return await this.addsService.findOne(id, req.user.id);
+  } catch (error) {
+    throw new HttpException(error.message, error.status || 500);
   }
+}
+
+
 
   @Get('all')
   async all(@Req() req : any){
@@ -88,4 +90,47 @@ export class AddsController {
       throw new HttpException(error.message , error.status)
     }
   }
+
+  @Post(':id/like')
+  async like( @Query('id') id : string) {
+    try {
+      return this.addsService.like(id);
+    } catch (error) {
+      throw new HttpException(error.message, error.status )
+    }
+  }
+
+  @Post(':id/report')
+async report(
+  @Param('id') id: string,
+  @Req() req: any,
+  @Body('message') message: string,
+) {
+  try {
+    return await this.addsService.report(req.user.id, id, message);
+  } catch (error) {
+    throw new HttpException(error.message, error.status || 400);
+  }
+}
+
+  @Delete(':id/unlike')
+  async unlike(@Param('id') id: string) {
+    try {
+      return this.addsService.unlike(id);
+    } catch (error) {
+      throw new HttpException(error.message, error.status )
+    }
+  }
+  
+  @Delete(':id')
+  async remove(@Query(':id') id : string , @Req() req : any){
+    try {
+      return this.addsService.deleteOne(id, req.user.id )
+    } catch (error) {
+      throw new HttpException(error.message , error.status)
+    }
+  }
+
+  
+
 }

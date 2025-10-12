@@ -29,6 +29,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^11.0.3",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/throttler": "^6.4.0",
     "@types/multer": "^2.0.0",
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",

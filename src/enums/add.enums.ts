@@ -19,19 +19,19 @@ export enum rentorsell {rent ='rent',sell ='sell'}
 
 
 
-export enum flatorhouse {
+export enum Flatorhouse {
     flat = "flat",
     house = "house"
 }
 
 
-export enum for_who  {
+export enum For_who  {
     family = "family",
     male = "male",
     female = "female"
 }
 
-export enum comforts {
+export enum Comforts {
     free_communal = "free communals",
     gas = "gas",
     electrocity = "electrocity",
@@ -49,3 +49,4 @@ export enum comforts {
     balcony="balcony",
     pet_friendly= "hayvonlar uchun ruhsat",
 }
+

@@ -18,23 +18,47 @@ export class AddsService {
               @InjectModel(User.name) private UserRepo : Model<UserDocument>) {}
 
   async create(body: CreateAddDto, userId: string) {  
-    return await  this.AddRepo.create({...body,  owner : userId })
+    const locationLink = await this.mapUrlCreator(body.location.lat , body.location.lng)
+    return await  this.AddRepo.create({...body,  owner : userId , location : locationLink})
   }
 
  async update(addId: string, body: UpdateAddDto, userId: string) {
     if(await this.isOwnAdd(addId, userId))
     return await this.AddRepo.findByIdAndUpdate(addId, body, { new: true });
-}
+  }
 
   async findOne(addId: string , userId: string){
     if(await this.isOwnAdd(addId, userId))
+    await this.watch(addId)
     return await this.AddRepo.findById(addId);
-}
-
-  async getAll(userId : string){
-     return this.AddRepo.find({owner:userId})
   }
 
+  async getAll(userId : string){
+     return await this.AddRepo.find({owner:userId})
+  }
+
+  async deleteOne(addId : string, userId : string){
+    if(await this.isOwnAdd(addId , userId))
+    return await this.AddRepo.findByIdAndDelete(addId)
+  }
+
+  async like(addId: string){
+    return await this.AddRepo.findByIdAndUpdate(addId , { $inc : {likes : 1}} , {new : true})
+  }
+
+  async unlike(addId : string){
+    return await this.AddRepo.findByIdAndUpdate(addId, {$inc : {likes : -1}} , {new : true})
+  }
+
+  async watch(addId :string){
+    return this.AddRepo.findByIdAndUpdate(addId , {$inc :{watched : 1}} , {new : true})
+  }
+
+   async report(userId :string, addId :string, message : string){
+    const createdReport= `from ${userId} message : ${message}`
+   return await this.AddRepo.findByIdAndUpdate(
+    addId, {$push: {reports : createdReport}},{new: true})
+  }
   async isOwnAdd(addId: string , userId : string){
     const add = await this.AddRepo.findById(addId);
       if (!add) throw new NotFoundException('Add not found')
@@ -45,8 +69,4 @@ export class AddsService {
     const baseUrl = 'https://www.google.com/maps?q=';
     return `${baseUrl}${lat},${lng}`;
   }
-
-
-
-
 }

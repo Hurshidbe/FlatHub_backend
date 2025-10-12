@@ -9,9 +9,9 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { comforts, flatorhouse, for_who, Regions, rentorsell } from '../../../enums/add.enums';
 import mongoose, { isValidObjectId } from 'mongoose';
 import { Transform, Type } from 'class-transformer';
+import { Comforts, Flatorhouse, For_who, Regions, rentorsell } from 'src/enums/add.enums';
 
 
 export class CreateAddDto {
@@ -33,8 +33,8 @@ export class CreateAddDto {
   location: { lat: number; lng: number };
 
   @IsNotEmpty()
-  @IsEnum(flatorhouse)
-  flatorhouse: flatorhouse;
+  @IsEnum(Flatorhouse)
+  flatorhouse: Flatorhouse;
 
   @IsNotEmpty()
    @Transform(({ value }) => {
@@ -73,8 +73,8 @@ export class CreateAddDto {
     }
   })
   @IsArray()
-  @IsEnum(for_who, { each: true })
-  for_who: for_who[];
+  @IsEnum(For_who, { each: true })
+  for_who: For_who[];
 
   @IsOptional()
   @IsDateString()
@@ -88,8 +88,8 @@ export class CreateAddDto {
       return value;
     }
   })
-  @IsEnum(comforts, { each: true })
-  comforts: comforts[];
+  @IsEnum(Comforts, { each: true })
+  comforts: Comforts[];
 
   @IsOptional()
   @IsArray()
@@ -110,4 +110,9 @@ export class CreateAddDto {
 
   @IsOptional()
   owner?: mongoose.Types.ObjectId;
+}
+
+export class ReportDto {
+  userId : string
+  message : string
 }

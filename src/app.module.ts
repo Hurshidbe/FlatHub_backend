@@ -11,13 +11,14 @@ import { SmsService } from './modules/sms/sms.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { AddsModule } from './modules/adds/adds.module';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { AdminModule } from './admin/admin.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 dotenv.config()
 
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal : true , envFilePath : ".env"}),
     MongooseModule.forRoot(process.env.DB_URL || ""),
-    UsersModule,
     JwtModule.registerAsync({
       global : true,
       imports : [ConfigModule, HttpModule, UsersModule , SmsModule , CloudinaryModule],
@@ -29,9 +30,19 @@ dotenv.config()
         }
       }
     }),
+    ThrottlerModule.forRoot({
+      throttlers : [
+        {
+          ttl : 10000,
+          limit : 7,
+        }
+      ]
+    }),
+    UsersModule,
     SmsModule,
     AddsModule,
-    CloudinaryModule
+    CloudinaryModule,
+    AdminModule
   ],
   controllers: [AppController],
   providers: [AppService ],
