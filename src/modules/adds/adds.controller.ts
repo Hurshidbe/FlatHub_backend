@@ -92,7 +92,7 @@ export class AddsController {
   }
 
   @Post(':id/like')
-  async like( @Query('id') id : string) {
+  async like( @Param('id') id : string) {
     try {
       return this.addsService.like(id);
     } catch (error) {
@@ -101,7 +101,7 @@ export class AddsController {
   }
 
   @Post(':id/report')
-async report(
+  async report(
   @Param('id') id: string,
   @Req() req: any,
   @Body('message') message: string,
@@ -123,7 +123,7 @@ async report(
   }
   
   @Delete(':id')
-  async remove(@Query(':id') id : string , @Req() req : any){
+  async remove(@Param(':id') id : string , @Req() req : any){
     try {
       return this.addsService.deleteOne(id, req.user.id )
     } catch (error) {
