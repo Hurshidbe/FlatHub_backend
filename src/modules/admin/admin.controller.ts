@@ -28,6 +28,8 @@ export class AdminController {
     private readonly jwtService: JwtService,
   ) {}
 
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(roles.superadmin)
   @Post()
   async create(@Body() createAdminDto: CreateAdminDto) {
     try {
