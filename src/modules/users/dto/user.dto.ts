@@ -52,9 +52,11 @@ export class UserDto {
 export class LoginDto {
 
   @Length(9)
+  @IsString()
   phone : string;
 
   @IsNotEmpty()
+  @IsString()
   password: string;
 
 }

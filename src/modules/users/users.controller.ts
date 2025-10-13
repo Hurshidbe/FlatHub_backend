@@ -15,7 +15,7 @@ import {
 import { UsersService } from './users.service';
 import { UserDto, LoginDto, ChangePasswordDto } from './dto/user.dto';
 import AuthGuard from '../../guards/autthGuard';
-import { ResponseInterceptor } from '../../response/response.interceptor';
+import { ResponseInterceptor } from '../../interceptors/response.interceptor';
 import { SmsService } from '../sms/sms.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -39,7 +39,7 @@ export class UsersController {
         const user = await this.usersService.create(userdata);
         await this.SmsService.sendSms(userdata.phone, custom_message);
       }
-      //// hurshidbe: sorry. Now I hava not access to sending codes now. I can send now only custom_message.
+      //// hurshidbe: sorry. Now I hava not access to sending codes now. I can send now only custom_message as 'bu eskizdan test'.
      return await  this.usersService.phoneVerifier(userdata.phone)
   } catch (error) {
     throw new HttpException(error.message , error.status);
@@ -62,9 +62,9 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Patch('change-pass')
-  async change_pass(@Req() req:any,@Body() body: ChangePasswordDto){
+  change_pass(@Req() req:any,@Body() body: ChangePasswordDto){
     try {
-      return await this.usersService.changePassword(body, req.user)
+      return this.usersService.changePassword(body, req.user)
     }catch(error){
       throw  new HttpException(error.message , error.status)
     }
@@ -72,10 +72,10 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Patch('edit')
-  async editProfile(@Req() req : any ,@Body() body: UpdateUserDto ){
+  editProfile(@Req() req : any ,@Body() body: UpdateUserDto ){
     try {
       const userId = req.user.id;
-      return await this.usersService.editProfile(body , userId)
+      return this.usersService.editProfile(body , userId)
     } catch (error) {
       throw new HttpException(error.message , error.status)
     }
@@ -85,28 +85,11 @@ export class UsersController {
   @UseGuards(AuthGuard)
   @Post('logout')
   logout(@Res({ passthrough: true }) res: any) {
-    res.clearCookie('authToken', { httpOnly: true, path: '/' });
+   try {
+     res.clearCookie('authToken', { httpOnly: true, path: '/' });
     return { message: 'Logged out successfully' };
+   } catch (error) {
+    throw new HttpException(error.message , error.status)
+   }
   }  
-
-  
-
-
-  /// get my ads
-
-  /// get my ad byid
-
-  /// edit my ad byid
-
-  /// delete my ad byid
-
-  
-
-  /// edit my info
-
-  /// logout
-
-
-
-
 }

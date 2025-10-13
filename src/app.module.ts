@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -11,7 +10,7 @@ import { SmsService } from './modules/sms/sms.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { AddsModule } from './modules/adds/adds.module';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
-import { AdminModule } from './admin/admin.module';
+import { AdminModule } from './modules/admin/admin.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 dotenv.config()
 
@@ -44,7 +43,7 @@ dotenv.config()
     CloudinaryModule,
     AdminModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService ],
 })
 export class AppModule {}

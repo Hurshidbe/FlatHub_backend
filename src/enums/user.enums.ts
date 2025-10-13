@@ -5,5 +5,6 @@ export enum sex {
 
 export enum roles {
   user ='user',
-  admin = 'admin'
+  admin = 'admin',
+  superadmin = 'superadmin'
 }
