@@ -40,7 +40,7 @@ export class Add {
   @Prop()
   comforts: Comforts[]
 
- @Prop({ type: [String], default: [] })
+  @Prop({ type: [String], default: [] })
   photos: string[];     // max 6
 
   @Prop()
@@ -61,6 +61,10 @@ export class Add {
 
   @Prop({default : 0})
   likes : number
+
+  @Prop({default:false})
+  is_scam? : boolean
+
 }
 
 export const AddSchema= SchemaFactory.createForClass(Add)

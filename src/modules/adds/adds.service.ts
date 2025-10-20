@@ -4,6 +4,7 @@ import {
   HttpException,
   Injectable,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateAddDto } from './dto/createAdd.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -11,6 +12,7 @@ import mongoose, { Model } from 'mongoose';
 import { Add, AddDocument } from './entities/add.entity';
 import { User, UserDocument } from '../users/entities/user.entity';
 import { UpdateAddDto } from './dto/updateAdd.dto';
+import { idText } from 'typescript';
 
 @Injectable()
 export class AddsService {
@@ -18,6 +20,7 @@ export class AddsService {
               @InjectModel(User.name) private UserRepo : Model<UserDocument>) {}
 
   async create(body: CreateAddDto, userId: string) {  
+    await this.checkAddLimit(userId)
     const locationLink = await this.mapUrlCreator(body.location.lat , body.location.lng)
     return await  this.AddRepo.create({...body,  owner : userId , location : locationLink})
   }
@@ -65,8 +68,24 @@ export class AddsService {
       if (add.owner.toString() !== userId) throw  new BadRequestException('You can update only your own adds')
       return true
   }
+
+  async checkAddLimit(userId: string) {
+    const now = new Date();
+    const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const existingAdd = await this.AddRepo.findOne({ owner: userId, createdAt: { $gte: yesterday }});
+    if (existingAdd) throw new BadRequestException( 'daily limit reached');
+    return true
+    }
+  
+
   async mapUrlCreator(lat: number, lng: number) {
     const baseUrl = 'https://www.google.com/maps?q=';
     return `${baseUrl}${lat},${lng}`;
+  }
+
+  async isBlockedUser (userId : string){
+     const user = await this.UserRepo.findById(userId)
+     if(user?.is_blocked === false)
+      return true
   }
 }

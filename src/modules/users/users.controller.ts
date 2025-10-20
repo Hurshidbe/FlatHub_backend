@@ -39,7 +39,7 @@ export class UsersController {
         const user = await this.usersService.create(userdata);
         await this.SmsService.sendSms(userdata.phone, custom_message);
       }
-      //// hurshidbe: sorry. Now I hava not access to sending codes now. I can send now only custom_message as 'bu eskizdan test'.
+      //// hurshidbe: sorry. Now I have not access now to sending codes via sms. I can send now only custom_message as 'bu eskizdan test'.
      return await  this.usersService.phoneVerifier(userdata.phone)
   } catch (error) {
     throw new HttpException(error.message , error.status);

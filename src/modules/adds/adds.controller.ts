@@ -23,11 +23,14 @@ import { parseArgs } from 'node:util';
 import mongoose from 'mongoose';
 import { UpdateAddDto } from './dto/updateAdd.dto';
 import { error } from 'node:console';
+import { AiService } from '../ai/ai.service';
 
 @UseGuards(AuthGuard)
 @Controller('adds')
 export class AddsController {
-  constructor(private readonly addsService: AddsService, private readonly cloudService : CloudinaryService) {}
+  constructor(private readonly addsService: AddsService,
+              private readonly cloudService : CloudinaryService,
+              private readonly ai : AiService) {}
 
   @Post()
   @UseInterceptors(FilesInterceptor('photos'))
@@ -131,6 +134,12 @@ export class AddsController {
     }
   }
 
-  
-
+  @Post('ai/description')
+  async generateDescription (@Body() body : CreateAddDto){
+    try {
+      return this.ai.generateText(body)
+    } catch (error) {
+      throw new HttpException(error.message , error.status)
+    }
+  }
 }

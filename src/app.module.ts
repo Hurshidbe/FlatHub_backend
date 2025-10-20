@@ -12,6 +12,7 @@ import { AddsModule } from './modules/adds/adds.module';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AiModule } from './modules/ai/ai.module';
 dotenv.config()
 
 @Module({
@@ -41,7 +42,8 @@ dotenv.config()
     SmsModule,
     AddsModule,
     CloudinaryModule,
-    AdminModule
+    AdminModule,
+    AiModule
   ],
   controllers: [],
   providers: [AppService ],
