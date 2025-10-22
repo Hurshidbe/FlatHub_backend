@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from "dotenv"
@@ -46,6 +45,6 @@ dotenv.config()
     AiModule
   ],
   controllers: [],
-  providers: [AppService ],
+  providers: [],
 })
 export class AppModule {}
