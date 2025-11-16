@@ -21,7 +21,7 @@ export class SmsService {
           body,
           {
             headers: {
-              Authorization: `Bearer ${process.env.SMS_TOKEN}`, // 🔑 token qo‘shildi
+              Authorization: `Bearer ${process.env.SMS_TOKEN}`, 
               'Content-Type': 'application/json',
             },
           },
